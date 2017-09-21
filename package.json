@@ -1,0 +1,33 @@
+{
+  "name": "listingapp",
+  "version": "1.0.0",
+  "description": "Mean Stack Listing application ",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahmedosamaalam/listingapp.git"
+  },
+  "keywords": [
+    "Mean",
+    "Stack",
+    "ListingApp\u001b[D\u001b[D\u001b[C\u001b[C"
+  ],
+  "author": "Ahmed Osama Alam\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ahmedosamaalam/listingapp/issues"
+  },
+  "homepage": "https://github.com/ahmedosamaalam/listingapp#readme",
+  "dependencies": {
+    "async": "^2.5.0",
+    "es6-denodeify": "^0.1.5",
+    "es6-lib": "^0.1.1",
+    "express": "^4.15.4",
+    "json": "^9.0.6",
+    "mongoose": "^4.11.12",
+    "typescriptkit": "^2.2.0"
+  }
+}
