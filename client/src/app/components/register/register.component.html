@@ -1,0 +1,109 @@
+<br>
+<br>
+<br>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-primary">
+        <h1 class="page-header">Register</h1>
+        <div class="panel-body">
+
+          <div class="row show-hide-message">
+              <div [ngClass]="messageClass">
+                  {{message}}
+              </div>
+          </div>
+
+
+          <form    [formGroup]="form"   (submit)="onRegisterFormSubmit()" >
+
+            <div class="form-group   ">
+              <label for="username" class="col-form-label ">Username</label>
+              <div  [ngClass]= "{'has-danger':(form.controls.username.errors && form.controls.username.dirty) || (!usernameValid && form.controls.username.dirty) , 'has-success': !form.controls.username.errors && usernameValid   } ">
+                <input type="text" id="username" class="form-control form-control-danger  " name="username" placeholder="Example: John"
+                       formControlName="username"  (blur)="checkUsername()"  >
+
+                <ul class="help-block  text-danger ">
+                  <li *ngIf="form.controls.username.errors?.required && form.controls.username.dirty ">This field is Required</li>
+                  <li *ngIf="form.controls.username.errors?.minlength ">Username must be greater than 3 character</li>
+                  <li *ngIf="form.controls.username.errors?.maxlength ">Username must be greater than 3 character</li>
+                  <li *ngIf="form.controls.username.errors?.cannotContainSpace && form.controls.username.dirty ">Username can not contain space</li>
+                  <li *ngIf="form.controls.username.errors?.usernameValidator && form.controls.username.dirty ">Username is not valid</li>
+                  <li *ngIf="usernameMessage" > {{usernameMessage}} </li>
+                </ul>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <div  [ngClass]= "{'is-invalid':(form.controls.email.errors && form.controls.email.dirty) || (!emailValid && form.controls.email.dirty) , 'is-valid': !form.controls.email.errors && emailValid  } ">
+
+                <label for="email" class="m-t-10">Email Address</label>
+                <input type="text" id="email" class="form-control" name="email" placeholder="Example: john.smith@gmail.com"
+                       formControlName="email" (blur)="checkEmail()"  >
+                <ul class="help-block  text-danger ">
+                  <li *ngIf="form.controls.email.errors?.required && form.controls.email.dirty ">This field is Required</li>
+                  <li *ngIf="form.controls.email.errors?.minlength ">Minimum 4 character</li>
+                  <li *ngIf="form.controls.email.errors?.maxlength ">Maximum 30 character</li>
+                  <li *ngIf="form.controls.email.errors?.cannotContainSpace && form.controls.email.dirty ">email can not contain space</li>
+                  <li *ngIf="form.controls.email.errors?.emailValidator && form.controls.email.dirty ">email is not valid</li>
+                  <li *ngIf="emailMessage" > {{emailMessage}}  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="form-group ">
+              <div  [ngClass]= "{'is-invalid':(form.controls.password.errors && form.controls.password.dirty) , 'is-valid': (!form.controls.password.errors)  } ">
+
+                <label for="role" class="m-t-10">Select your Role</label>
+                <select id="role" class="form-control" name="role" formControlName="role">
+
+                  <option value="guest">Guest</option>
+                  <option value="serviceProvider">Service provider</option>
+                  <option value="merchant">Merchant</option>
+                </select>
+                <ul class="help-block  text-danger ">
+                  <li *ngIf="form.controls.role.errors?.required && form.controls.role.dirty ">Role Required</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div  [ngClass]= "{'is-invalid':(form.controls.password.errors && form.controls.password.dirty) , 'is-valid': (!form.controls.password.errors)  } ">
+
+                <label for="password" class="m-t-10">Password</label>
+                <input type="password" id="password" class="form-control" name="password" placeholder=""
+                       formControlName="password">
+                <ul class="help-block  text-danger ">
+                  <li *ngIf="form.controls.password.errors?.required && form.controls.password.dirty ">Password Required</li>
+                  <li *ngIf="form.controls.password.errors?.minlength ">Minimum 6 character </li>
+                  <li *ngIf="form.controls.password.errors?.maxlength ">Maximum 30 character</li>
+                  <li *ngIf="form.controls.password.errors?.cannotContainSpace && form.controls.password.dirty ">Password can not contain space</li>
+                  <li *ngIf="form.controls.password.errors?.passwordlValidator && form.controls.password.dirty ">Password is not valid</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="confirmpass" class="m-t-10">Confirm Password</label>
+              <div  [ngClass]= "{'is-invalid':(form.controls.confirmpass.errors && form.controls.confirmpass.dirty) , 'is-valid': (!form.controls.password.errors)  } ">
+
+                <input type="password" id="confirmpass" class="form-control" name="confirmpass" placeholder=""
+                       formControlName="confirmpass">
+                <ul class="help-block  text-danger ">
+                  <li *ngIf="form.controls.confirmpass.errors?.required && form.controls.confirmpass.dirty ">This field is Required</li>
+                  <li *ngIf="form.errors?.machaingPassword   && form.controls.confirmpass.dirty "> Password do not match</li>
+                </ul>
+              </div>
+            </div>
+            <input type="submit"   [disabled]="!form.valid || processing  || !usernameValid  || !emailValid"  class="btn btn-primary m-t-10" id="submit" name="submit" value="Submit">
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
