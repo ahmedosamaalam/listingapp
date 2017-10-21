@@ -1,5 +1,6 @@
 const  User = require('../models/user');
-
+const  jwt  = require('jsonwebtoken');
+const  config =  require('../config/database');
 
 module.exports = ( router ) => {
 
@@ -59,30 +60,59 @@ module.exports = ( router ) => {
      }
     });
 
+    router.post('/login' , (req , res)=>{
+        if(!req.body.username){
+            res.json({success:false , message:"you must provide an username"});
+        }else{
+            if(!req.body.password){
+                res.json({success:false , message:"you must provide an  password"});
+            } else {
+               User.findOne({username:req.body.username.toLowerCase()} , (err, user) =>{
+                   if(err){
+                       res.json({success:false  , message:err});
+                   }else {
+                       if(!user){
+                           res.json({success:false , message:"username not found"});
+                       }else {
+                           const validPassword = user.comparePassword(req.body.password);
+                           if(!validPassword){
+                               res.json({success:false , message:"invalid password"});
+                           } else {
+
+                               const  token =  jwt.sign({userID:user._id} , config.sercret , {expiresIn:'24h'} );
+
+                               res.json({success:true, message:"Success!" , token:token , user:{username:user.username} });
+                           }
+                       }
+                   }
+               });
+            }
+        }
+    });
 
 
- router.get('/checkUsername/:username' , (req, res) =>{
+    router.get('/checkUsername/:username' , (req, res) =>{
 
-     if (!req.params.username){
-         res.json({success:false ,message:'username not provided'});
-     }else {
-         User.findOne({username:req.params.username} , (err, user) =>{
+        if (!req.params.username){
+            res.json({success:false ,message:'username not provided'});
+        }else {
+            User.findOne({username:req.params.username} , (err, user) =>{
 
-             if(err){
-                 res.json({success:false , message:err})
-             }else{
-                 if (user){
-                     res.json({success:false , message:'username already taken '});
-                 }else {
-                     res.json({success:true , message:'username available '})
-                 }
-             }
-         });
-     }
+                if(err){
+                    res.json({success:false , message:err})
+                }else{
+                    if (user){
+                        res.json({success:false , message:'username already taken '});
+                    }else {
+                        res.json({success:true , message:'username available '})
+                    }
+                }
+            });
+        }
 
     });
 
- router.get('/checkEmail/:email' , (req ,res ) =>{
+    router.get('/checkEmail/:email' , (req ,res ) =>{
         if(!req.params.email){
             res.json({success:false , message:'email was not provided'});
         }else{
@@ -100,6 +130,48 @@ module.exports = ( router ) => {
         }
 
     });
+
+
+
+
+    // Creating a middleware, grab those token( header)
+    // for intercept angular header with express header
+    // keep in mind any route comes after this middleware automatically run this middleware
+    router.use((req, res, next)=>{
+        //when angular 2 req with header , it automatically  going to search express header
+       const token =  req.headers['authorization'] ; //express header and pass authorization that we created in angular header
+
+
+       if(!token){ //check token
+           res.json({success:false , message:'No token provide'});
+       }else{
+           jwt.verify(token , config.sercret , (err , decoded) =>{ //verify token
+               if(err){
+                   res.json({success:false , message:'Token invalid'+err})
+               }else{
+                   req.decoded = decoded; //valid token just assign global variable that access  in profile
+                   next(); //exit
+               }
+           })
+       }
+    });
+
+
+    router.get('/profile' , (req, res)=>{
+       User.findOne({_id : req.decoded.userID}).select('username email').exec((err, user)=>{
+           if(err){
+               res.json({success:false ,  message:err})
+           }else {
+               if (!user){
+                   res.json({success:false ,  message:'User not found'});
+               }else {
+                   res.json({success:true , user:user});
+               }
+           }
+       });
+    });
+
+
 
 
 
