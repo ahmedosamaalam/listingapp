@@ -18,9 +18,9 @@ export class RegisterComponent  {
   message; // message variable for show and hide message
   messageClass; // class binding
   processing = false; //for only one time submit form
-  usernameValid;
+  usernameValid =true;
   usernameMessage;
-  emailValid;
+  emailValid=true;
   emailMessage;
 
   form: FormGroup;
@@ -39,7 +39,7 @@ export class RegisterComponent  {
      this.form.get('password').enable();
      this.form.get('confirmpass').enable();*/
    }
-   formDisable(){
+  formDisable(){
      this.form.controls['username'].disable();
      this.form.controls['email'].disable();
      this.form.controls['role'].disable();
@@ -124,6 +124,7 @@ export class RegisterComponent  {
     });
 
   }
+  //check username, current username already taken or not
   checkUsername(){
       const  username =  this.form.get('username').value;
         this._authService.checkUsername(username).subscribe(data=>{
@@ -136,7 +137,7 @@ export class RegisterComponent  {
           }
         });
   }
-
+  //check email id, current email alreafy =
   checkEmail(){
     const  email =  this.form.get('email').value;
     this._authService.checkEmail(email).subscribe(data=>{

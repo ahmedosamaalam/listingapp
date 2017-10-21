@@ -1,0 +1,77 @@
+<br>
+<br>
+<br>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-12 ">
+      <div class="panel panel-primary">
+        <h1 class="page-header">Login</h1>
+        <div class="panel-body">
+
+          <div class="row show-hide-message">
+                <div [ngClass] ="messageClass">
+                        {{message}}
+                </div>
+          </div>
+
+
+            <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+              <div class="panel panel-info" >
+                <div class="panel-heading">
+                  <div class="panel-title">Sign In</div>
+
+                </div>
+
+                <div style="padding-top:30px" class="panel-body" >
+
+                  <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+
+                  <form  [formGroup]="form"    (submit)="onLoginFormSubmit()"  class="form-horizontal" role="form">
+
+                    <div [ngClass]="{'has-error':form.controls.username.errors && form.controls.username.dirty ,'has-success':form.controls.username.valid && form.controls.username.dirty }"   style="margin-bottom: 25px" class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                      <input formControlName="username"  id="username" type="text" class="form-control" name="username"  placeholder="username  ">
+                       <ul class="help-block">
+                          <li *ngIf="form.controls.username.errors?.required && form.controls.username.dirty ">this field is required</li>
+                       </ul>
+
+                    </div>
+
+                    <div [ngClass]="{'has-error':form.controls.password.errors && form.controls.password.dirty ,'has-success':form.controls.password.valid && form.controls.password.dirty }"   style="margin-bottom: 25px" class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                      <input formControlName="password" id="password" type="password" class="form-control" name="password" placeholder="password">
+                      <ul class="help-block">
+                        <li *ngIf="form.controls.password.errors?.required && form.controls.password.dirty ">this field is required</li>
+                      </ul>
+                    </div>
+
+
+
+                    <div style="margin-top:10px" class="form-group">
+                      <!-- Button -->
+
+                      <div class="col-sm-12 controls">
+                        <input [disabled]="!form.valid || processing " class="btn btn-success" type="submit" value="login">
+
+
+                      </div>
+                    </div>
+
+
+
+
+
+
+                  </form>
+              </div>
+            </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
