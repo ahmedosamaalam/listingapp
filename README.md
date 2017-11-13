@@ -50,8 +50,8 @@ run http://localhost:4200/ on your web browser for live application
 
 Built With
 
-Angular 4
-Bootstrap 4
+Angular4
+Bootstrap4
 Node
 Express JS
 MongoDb
