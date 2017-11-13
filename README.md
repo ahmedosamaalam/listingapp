@@ -10,7 +10,7 @@ User register api done is so far.
 
 Getting Started
 
-Clone Git Repository from https://github.com/arbabmushtaq/smartstop
+Clone Git Repository from https://github.com/ahmedosamaalam/listingapp.git
 
 <h3>Prerequisites<h3>
 
