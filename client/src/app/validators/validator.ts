@@ -10,7 +10,7 @@ export class  CustomValidator{
             if (egExp.test(control.value )){
               return null ;
             }else {
-            //  return {usernameValidator:true}
+
               return {'usernameValidator' : true};
             }
     }
