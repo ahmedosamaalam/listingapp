@@ -60,7 +60,7 @@
             <label for="role" class="m-t-10">Select your Role</label>
             <select id="role" class="form-control" name="role" formControlName="role">
 
-              <option value="guest">Guest</option>
+              <option [selected]="null" value="">User</option>
               <option value="serviceProvider">Service provider</option>
               <option value="merchant">Merchant</option>
             </select>
@@ -104,6 +104,7 @@
       </div>
       </div>
     </div>
+
   </div>
 </div>
 

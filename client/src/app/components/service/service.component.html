@@ -1,0 +1,161 @@
+<div class="container">
+  <div class="row">
+
+
+    <h3 class="page-header">Service</h3>
+
+    <div class="container">
+      <div class="row">
+
+      <div *ngIf="!newService" class="center"><button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary center-block">Add Service</button></div>
+    <br>
+
+    <!-- line modal -->
+    <div  class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title    " id="lineModalLabel">App Service</h3>
+            <button  type="button" class="close " data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+          </div>
+          <div class="modal-body">
+
+            <div *ngIf="message" class="row">
+              <div *ngIf="messageClass">
+                {{message}}
+              </div>
+            </div>
+
+
+
+            <!-- content goes here -->
+            <form [formGroup]="form"  (submit)="addServiceFormSubmit()" enctype="multipart/form-data" >
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input formControlName="name" type="text" class="form-control" name="name" id="name" placeholder="Enter name">
+                  </div>
+                </div>
+
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="description">Description</label>
+                    <input formControlName="description" type="text" class="form-control" name="description" id="description" placeholder="Enter description">
+
+                    <ul class="alert-danger" *ngIf="form.controls.description.invalid && (form.controls.description.dirty || form.controls.description.touchend)  ">
+                      <li *ngIf="form.controls.description.errors.required">This field is required</li>
+                      <li *ngIf="form.controls.description.errors.minlength || form.controls.description.errors.maxlength">10 to 256 char limit</li>
+                    </ul>
+
+
+                  </div>
+
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="location">Location</label>
+                    <input formControlName="location" type="test" class="form-control" name="location" id="location" placeholder="Enter location">
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input formControlName="phone" type="text" class="form-control" name="phone" id="phone" placeholder="Enter phone">
+                    <ul class="alert-danger" *ngIf="form.controls.phone.invalid && (form.controls.phone.dirty || form.controls.phone.touchend)  ">
+                      <li *ngIf="form.controls.phone.errors.required">This field is required</li>
+                      <li *ngIf="form.controls.phone.errors.minlength || form.controls.phone.errors.maxlength">Not VAlid</li>
+                    </ul>
+
+
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="form-group">
+                <div class="col-md-6">
+                  <label for="category">Category</label>
+                  <select id="category" name="category" class="form-control" formControlName="category">
+
+                    <option [selected]="form.controls.category.value == null" value="">-- Select --</option>
+                    <option *ngFor="let g of categories" [selected]="g._id == category" [value]="g._id">{{g.name}}</option>
+
+                  </select>
+                </div>
+              </div>
+
+              <button   type="submit" class="btn btn-default" >Submit</button>
+
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+              <div class="btn-group" role="group">
+                <button (click)="goBack()" type="button" class="btn btn-default" data-dismiss="modal"  role="button">Back</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+<div class="container">
+  <div class="row">
+
+    <div id="carousel-example" class="carousel slide hidden-xs" data-ride="carousel">
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <div class="item active">
+          <div class="row">
+
+            <div class="col-sm-3" *ngFor="let service of services" >
+              <div class="col-item">
+                <div class="photo">
+                  <img src="http://success-at-work.com/wp-content/uploads/2015/04/free-stock-photos.gif" class="img-responsive" alt="a" />
+                </div>
+                <div class="info">
+                  <div class="row">
+                    <div class="price col-md-6" >
+                      <h5> {{service.name}} </h5>
+                      <h5 class="price-text-color"> {{service.location}}</h5>
+                    </div>
+
+                  </div>
+                  <div class="separator clear-left">
+                    <p class="btn-add">
+                      <a  [routerLink]="['/edit-service/',service._id]"><button type="button" class="btn btn-default">Edit</button></a>
+                    </p>
+                    <p class="btn-details">
+                      <button (click)="deleteService(service._id)" type="button" class="btn btn-danger">Delete</button></p>
+                  </div>
+                  <div class="clearfix">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+

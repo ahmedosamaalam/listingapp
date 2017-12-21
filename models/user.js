@@ -83,7 +83,11 @@ const userSchema = new Schema({
     username: { type: String , required: true , lowercase: true , unique: true , validate: usernameValidator } ,
     email: { type: String , required: true , lowercase: true , unique: true  ,validate:emailValidator} ,
     password: { type: String , required: true , validate:passwordValidator  },
-    role: { type: String , required: true   },
+ //   role: { type: Array , default:['user'] },
+    role: { type: String , default:'user' },
+    active : {type: Boolean , required:true , default:false},
+    temporarytoken: {type:String ,  required:true },
+    superAdmin: {type:Boolean , default:false}
 });
 
 //Schema middleware to encrypt password

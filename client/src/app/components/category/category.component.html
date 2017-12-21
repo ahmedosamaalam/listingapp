@@ -1,0 +1,77 @@
+<br>
+<br>
+<br>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-6">
+
+      <div *ngIf="message && newCategory" class="row " >
+          <div *ngIf="messageClass" >
+            {{message}}
+          </div>
+    </div>
+      <button *ngIf="!newCategory" type="button" (click)="addCategory()" class="btn btn-success">Add Category</button>
+      <button *ngIf="!newCategory" type="button" (click)="refresh()" class="btn btn-default">Refresh Category</button>
+
+      <br>
+      <br>
+
+    <div  *ngIf="!newCategory">
+
+
+      <table class="table" >
+        <thead class="thead-light">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Category</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+
+        </tr>
+        </thead>
+        <tbody *ngFor="let category of categories ; let i = index">
+        <tr >
+          <th >{{i+1}} </th>
+          <td>{{category.name}}</td>
+          <td>  <a  [routerLink]="['/edit-category/',category._id]"><button type="button" class="btn btn-default">Edit</button></a></td>
+          <td> <button (click)="deleteCategory(category._id)" type="button" class="btn btn-default">Delete</button></td>
+
+        </tr>
+        </tbody>
+      </table>
+
+
+
+    </div>
+
+
+
+      <form [formGroup]="form"  *ngIf="newCategory"  (submit)="addCategoryFormSubmit()"  class="form-group">
+        <div>
+          <label for="category" >Add Category</label>
+          <input formControlName="category" type="text" name="category" id="category"class="form-control" placeholder="category name">
+
+          <ul class="alert-danger" *ngIf="form.controls.category.invalid && (form.controls.category.dirty || form.controls.category.touchend)  ">
+            <li *ngIf="form.controls.category.errors.required">This field is required</li>
+            <li *ngIf="form.controls.category.errors.minlength || form.controls.category.errors.maxlength">2 to 120 char limit</li>
+          </ul>
+
+        </div>
+
+        <button [disabled]="!form.valid || processing" type="submit" class="btn btn-success">Submit</button>
+        <button [disabled]="processing" type="submit" class="btn btn-success" (click)="goBack()">Back</button>
+      </form>
+
+
+
+
+
+
+
+
+    </div>
+
+  </div>
+</div>

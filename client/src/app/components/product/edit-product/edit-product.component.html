@@ -1,0 +1,73 @@
+<br>
+<br>
+<div class="container">
+  <div class="row">
+
+
+    <h3 class="page-header">Product</h3>
+    <br>
+    <br>
+    <div class="container">
+      <div class="row">
+
+    <!-- content goes here -->
+<form  (submit)="updateCategory()" >
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input [(ngModel)]="product.name" type="text" class="form-control" name="name" id="name" placeholder="Enter name">
+      </div>
+    </div>
+
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input [(ngModel)]="product.description" type="text" class="form-control" name="description" id="description" placeholder="Enter description">
+
+      </div>
+
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input [(ngModel)]="product.price"  type="number" class="form-control" name="price" id="price" placeholder="Enter price">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input [(ngModel)]="product.phone"  type="number" class="form-control" name="phone" id="phone" placeholder="Enter phoneno">
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="manufacture">Manufacture</label>
+        <input [(ngModel)]="product.manufacture"  type="text" class="form-control" name="manufacture" id="manufacture" placeholder="Enter manufacture">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-6">
+      <label for="category">Category</label>
+      <select [(ngModel)]="product.category"  id="category" name="category" class="form-control">
+
+
+        <option *ngFor="let g of categories"  [ngValue]="g._id">{{g.name}}</option>
+
+      </select>
+    </div>
+  </div>
+
+  <button   type="submit" class="btn btn-default" >Submit</button>
+
+</form>
+      </div>
+    </div>
+  </div>
+</div>

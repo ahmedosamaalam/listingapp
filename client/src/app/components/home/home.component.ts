@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoryService } from "../../services/category.service";
+
+declare   var $:any;
 
 @Component({
  // selector: 'app-home',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  categories;
+
+  constructor(private _categoryService:CategoryService) { }
+
+
+  getAllcategory(){
+    this._categoryService.getAllCategory().subscribe(data=>{
+
+      this.categories = data.category;
+    })
+  }
+
 
   ngOnInit() {
+
+    this.getAllcategory();
+
+
+
   }
 
 }

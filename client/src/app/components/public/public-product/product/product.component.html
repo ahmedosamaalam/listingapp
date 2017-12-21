@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <h2>Retail Detail</h2>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+
+          <div class=" col-md-9 col-lg-9 " *ngFor="let p of product">
+            <table class="table table-user-information">
+              <tbody>
+              <tr>
+                <td>Name:</td>
+                <td>{{p.name}}</td>
+              </tr>
+              <tr>
+                <td>Price</td>
+                <td>{{p.price}}</td>
+              </tr>
+              <tr>
+                <td>Merchant </td>
+                <td>{{p.createdBy}}</td>
+              </tr>
+
+
+              <tr>
+                <td>Phone</td>
+                <td>{{p.phone}}</td>
+              </tr>
+              <tr>
+                <td>Description</td>
+                <td>{{p.description}}</td>
+              </tr>
+
+              <div class="view">
+                <bar-rating [rate]="faoRating" (rateChange)="onFaoRate($event)" [max]="10" [theme]="'fontawesome-o'"></bar-rating>
+              </div>
+              Total ratings:{{totalHitLenght}}
+              Average:{{mean}}
+
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

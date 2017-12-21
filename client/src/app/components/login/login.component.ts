@@ -21,6 +21,8 @@ export class LoginComponent implements OnInit {
 
   form:FormGroup;
 
+
+
   formDisable(){
     this.form.controls['username'].disable();
     this.form.controls['password'].disable();
@@ -73,7 +75,7 @@ export class LoginComponent implements OnInit {
            if(this.previousUrl){
              this._router.navigate([this.previousUrl]);
            }else {
-             this._router.navigate(['/dashboard']);
+             this._router.navigate(['/home']);
            }
 
          },2000);
@@ -82,6 +84,16 @@ export class LoginComponent implements OnInit {
       }
     })
   }
+
+  //
+  // fbLogin() {
+  //   this._authService.fbLogin().subscribe(() => {
+  //     console.log('User has been logged in');
+  //     this._router.navigate(['/profile']);
+  //   });  }
+
+
+
 
 
   ngOnInit() {

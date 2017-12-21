@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="row">
+
+    <h3 class="page-header">Products </h3>
+    <div class="container">
+      <div class="row">
+        <div class="span4">
+          <form class="form-search">
+            <div class="input-append">
+              <input   name="searchquery" id="searchquery" type="search"  [(ngModel)]="searchquery" placeholder="search an product">
+              <button type="submit" (click)="searhProducr(searchquery)"  class="btn">Search</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+    <br>
+    <br>
+    <br>
+
+
+    <div class="container" *ngIf="!isQuery">
+      <div class="row">
+
+    <div class="col-sm-3" *ngFor="let product of products | paginate: { itemsPerPage: 4, currentPage: p }" >
+      <div class="col-item">
+        <div class="photo">
+          <img src="http://success-at-work.com/wp-content/uploads/2015/04/free-stock-photos.gif" class="img-responsive" alt="a" />
+        </div>
+        <div class="info">
+          <div class="row">
+            <div class="price col-md-6" >
+              <h5>
+                {{product.name}}</h5>
+              <h5 class="price-text-color">
+                ${{product.price}}</h5>
+            </div>
+
+          </div>
+          <div class="separator clear-left">
+            <p class="">
+              <a  [routerLink]="['/product/',product._id]"><button type="button" class="btn btn-default">Details</button></a>
+            </p>
+          </div>
+          <div class="clearfix">
+          </div>
+        </div>
+      </div>
+      <br>
+    </div>
+      </div>
+    </div>
+
+
+
+        <div class="container" *ngIf="isQuery">
+          <div class="row">
+
+            <div class="col-sm-3" *ngFor="let product of products  | paginate: { itemsPerPage: 4, currentPage: p }" >
+              <div class="col-item">
+                <div class="photo">
+                  <img src="http://success-at-work.com/wp-content/uploads/2015/04/free-stock-photos.gif" class="img-responsive" alt="a" />
+                </div>
+                <div class="info">
+                  <div class="row">
+                    <div class="price col-md-6" >
+                      <h5>
+                        {{product.name}}</h5>
+                      <h5 class="price-text-color">
+                        ${{product.price}}</h5>
+                    </div>
+
+                  </div>
+                  <div class="separator clear-left">
+                    <p class="">
+                      <a  [routerLink]="['/product/',product._id]"><button type="button" class="btn btn-default">Details</button></a>
+                    </p>
+                  </div>
+                  <div class="clearfix">
+                  </div>
+                </div>
+              </div>
+              <br>
+            </div>
+
+
+      </div>
+    </div>
+
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+  </div>
+</div>
+
+

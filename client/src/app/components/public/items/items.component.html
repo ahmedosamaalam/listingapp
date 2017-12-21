@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="row">
+
+
+    <h3 class="page-header">Product</h3>
+
+    <br>
+    <br>
+    <div class="container">
+      <div class="row">
+
+    <div class="col-sm-3" *ngFor="let product of products" >
+      <div class="col-item">
+        <div class="photo">
+          <img src="http://success-at-work.com/wp-content/uploads/2015/04/free-stock-photos.gif" class="img-responsive" alt="a" />
+        </div>
+        <div class="info">
+          <div class="row">
+            <div class="price col-md-6" >
+              <h5>
+                {{product.name}}</h5>
+              <h5 class="price-text-color">
+                ${{product.price}}</h5>
+            </div>
+
+          </div>
+          <div class="separator clear-left">
+            <p class="">
+              <a  [routerLink]="['/product/',product._id]"><button type="button" class="btn btn-default">Details</button></a>
+            </p>
+
+          </div>
+          <div class="clearfix">
+          </div>
+        </div>
+      </div>
+    </div>
+
+      </div>
+    </div>
+
+</div>
+</div>
+
+<br>
+<br>
+<div class="container">
+  <div class="row">
+
+
+    <h3 class="page-header">Service</h3>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 col-xsx-6" *ngFor="let service of services" >
+          <div class="serviceBox">
+            <div class="service-icon">
+              <span><i class="fa fa-id-card-o"></i></span>
+            </div>
+            <div class="service-content">
+              <h3 class="title">{{service.name}}</h3>
+              <p class="description"> {{service.description}} </p>
+              <a  [routerLink]="['/service/',service._id]"><button type="button" class="btn btn-default">Details</button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

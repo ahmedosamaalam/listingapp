@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <h2>Retail Detail</h2>
+
+    <div class="container">
+      <div class="row">
+    <div class="col-md-8">
+
+      <div class=" col-md-9 col-lg-9 " *ngFor="let s of service">
+        <table class="table table-user-information">
+          <tbody>
+          <tr>
+            <td>Name:</td>
+            <td>{{s.name}}</td>
+          </tr>
+          <tr>
+            <td>Location</td>
+            <td>{{s.location}}</td>
+          </tr>
+          <tr>
+            <td>Phone </td>
+            <td>{{s.phone}}</td>
+          </tr>
+
+
+          <tr>
+            <td>CreatedBy</td>
+            <td>{{s.createdBy}}</td>
+          </tr>
+          <tr>
+            <td>Description</td>
+            <td>{{s.description}}</td>
+          </tr>
+
+
+          <div class="view">
+            <bar-rating [rate]="faoRating" (rateChange)="onFaoRate($event)" [max]="10" [theme]="'fontawesome-o'"></bar-rating>
+          </div>
+
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+</div>

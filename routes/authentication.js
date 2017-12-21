@@ -1,8 +1,21 @@
 const  User = require('../models/user');
 const  jwt  = require('jsonwebtoken');
 const  config =  require('../config/database');
+const nodemailer = require('nodemailer');
+const sgTransport = require('nodemailer-sendgrid-transport');
+
 
 module.exports = ( router ) => {
+
+
+    var options = {
+        auth: {
+            api_key: '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'
+        }
+    }
+
+    var client = nodemailer.createTransport(sgTransport(options));
+
 
     router.post('/register' , ( req , res  ) => {
 
@@ -22,7 +35,8 @@ module.exports = ( router ) => {
             username:req.body.username.toLowerCase(),
             email:req.body.email.toLowerCase(),
             password:req.body.password,
-            role:req.body.role
+            role:req.body.role,
+            temporarytoken: jwt.sign({email:req.body.email} , config.sercret , {expiresIn:'24h'} )
 
         });
             user.save((err) =>{
@@ -50,7 +64,26 @@ module.exports = ( router ) => {
 
                     }
                 }else {
-                    res.json({success: true, message: 'User saved '});
+
+                    var email = {
+                        from: 'ListingApp , info@listingapp.com',
+                        to: user.email,
+                        subject: 'Account verification ',
+                        text: 'Thank '+user.username+' you for the registration. Please click this link to activate the account: http://localhost:4200/activate/'+user.temporarytoken,
+                        html: 'Thank '+user.username+' you for the registration. Please click this link to activate the account <a href="http://localhost:4200/activate/'+ user.temporarytoken+' "> http://localhost:4200/activate  </a> '
+                    };
+
+                    client.sendMail(email, function(err, info){
+                        if (err ){
+                            console.log(err);
+                        }
+                        else {
+                            console.log('Message sent: ' + info.response);
+                        }
+                    });
+
+
+                    res.json({success: true, message: 'Account registerd. Please check your email for activation link.'});
                 }
 
             }); //user save method closed
@@ -89,6 +122,10 @@ module.exports = ( router ) => {
             }
         }
     });
+
+
+
+
 
 
     router.get('/checkUsername/:username' , (req, res) =>{
@@ -134,31 +171,94 @@ module.exports = ( router ) => {
 
 
 
+
+
+    //this middleware disabled every time when we test the route in postman
     // Creating a middleware, grab those token( header)
     // for intercept angular header with express header
     // keep in mind any route comes after this middleware automatically run this middleware
-    router.use((req, res, next)=>{
-        //when angular 2 req with header , it automatically  going to search express header
-       const token =  req.headers['authorization'] ; //express header and pass authorization that we created in angular header
+        router.use((req, res, next)=>{
+            //when angular 2 req with header , it automatically  going to search express header
+           const token =  req.headers['authorization'] ; //express header and pass authorization that we created in angular header
 
 
-       if(!token){ //check token
-           res.json({success:false , message:'No token provide'});
-       }else{
-           jwt.verify(token , config.sercret , (err , decoded) =>{ //verify token
-               if(err){
-                   res.json({success:false , message:'Token invalid'+err})
-               }else{
-                   req.decoded = decoded; //valid token just assign global variable that access  in profile
-                   next(); //exit
-               }
-           })
-       }
+           if(!token){ //check token
+               res.json({success:false , message:'No token provide'});
+           }else{
+               jwt.verify(token , config.sercret , (err , decoded) =>{ //verify token
+                   if(err){
+                       res.json({success:false , message:'Token invalid'+err})
+                   }else{
+                       req.decoded = decoded; //valid token just assign global variable that access  in profile
+                       next(); //exit
+                   }
+               })
+           }
+        });
+
+
+
+    router.put('/activate/:token' , (req, res)=>{
+        User.findOne({temporarytoken: req.params.token } , (err , user)=>{
+            if (err){
+                res.json({success:false , message:+err});
+            }else {
+                    const token = req.params.token;
+                    jwt.verify(token , config.sercret , (err , decoded) =>{ //verify token
+                        if(err){
+                            res.json({success:false , message:'Activation link has expired: '+err})
+                        }else if (!user) {
+                            res.json({success:false , message:'Activation link has expired'})
+                        }
+                        else{
+
+                            user.temporarytoken = false;
+                            user.active = true;
+
+                            user.save((err)=>{
+                                if (err){
+                                    console.log('database krne me error hai : '+err);
+                                }else {
+
+
+
+                                    var email = {
+                                        from: 'ListingApp , info@listingapp.com',
+                                        to: user.email,
+                                        subject: 'Account activated ',
+                                        text: 'Thank '+user.username+' your account has been activated.',
+                                        html: 'Thank '+user.username+' your account has been activated.'
+                                    };
+
+                                    client.sendMail(email, function(err, info){
+                                        if (err ){
+                                            console.log(error);
+                                        }
+                                        else {
+                                            console.log('Message sent: ' + info.response);
+                                        }
+                                    });
+
+                                    res.json({success:true , message:'Account activated!'});
+                                }
+                            });
+
+
+
+
+                        }
+                    })
+
+                }
+
+        })
+
     });
 
 
+
     router.get('/profile' , (req, res)=>{
-       User.findOne({_id : req.decoded.userID}).select('username email').exec((err, user)=>{
+       User.findOne({_id : req.decoded.userID}).select('username email role').exec((err, user)=>{
            if(err){
                res.json({success:false ,  message:err})
            }else {
@@ -170,6 +270,25 @@ module.exports = ( router ) => {
            }
        });
     });
+
+
+
+    router.get('/role', (req , res)=>{
+
+        User.findOne({_id : req.decoded.userID} ,(err, user)=>{
+            if(err){
+                res.json({success:false ,  message:err})
+            }else {
+                if (!user){
+                    res.json({success:false ,  message:'User not found'});
+                }else {
+                    res.json({success:true , role:user.role});
+                }
+            }
+        });
+
+    });
+
 
 
 

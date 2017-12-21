@@ -1,0 +1,41 @@
+<br>
+<br>
+<br>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-6 ">
+
+      <div *ngIf="message && newCategory" class="row " >
+        <div *ngIf="messageClass" >
+          {{message}}
+        </div>
+      </div>
+
+
+
+      <div >
+
+
+
+        <form    (submit)="updateCategory()"  class="form-group">
+          <div>
+            <label for="name" >Add Category</label>
+            <input  type="text" name="name" id="name"class="form-control" placeholder="category name"  [(ngModel)]="category.name">
+
+
+          </div>
+
+          <button  type="submit" class="btn btn-success">Update</button>
+
+        </form>
+
+
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

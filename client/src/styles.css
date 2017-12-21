@@ -1,1 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,600');
+
+
+.view{
+  display: flex;
+  flex-direction: column;
+
+}
+
+bar-rating{
+  margin: 0.5em;
+}
+
+.link {
+  margin-left: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #50e3c2;
+}
+
+.br-fontawesome-o .br-unit {
+  align-items: center;
+}
+.br-fontawesome-o .br-unit {
+  font: normal normal normal 20px/1 FontAwesome;
+  margin-right: 2px;
+}
+.br-fontawesome-o .br-unit:after {
+  content: '\f006';
+  color: #d2d2d2;
+}
+.br-fontawesome-o .br-selected:after {
+  content: '\f005';
+  color: #50E3C2;
+}
+.br-fontawesome-o .br-active:after {
+  content: '\f005';
+  color: #50E3C2;
+}
+.br-fontawesome-o .br-fraction:after {
+  content: '\f123';
+}

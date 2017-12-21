@@ -10,7 +10,7 @@ export class  CustomValidator{
             if (egExp.test(control.value )){
               return null ;
             }else {
-
+            //  return {usernameValidator:true}
               return {'usernameValidator' : true};
             }
     }
@@ -60,6 +60,15 @@ export class  CustomValidator{
         return {'machaingPassword':true}
       }
     }
+  }
+
+  static alphanumericChecker(control){
+     const  regExp = new  RegExp(/^[a-zA-Z0-9? ]+$/);
+     if(regExp.test(control.value)){
+       return null
+     }else {
+       return {'alphanumericChecker':true};
+     }
   }
 
  /* formEnable(form){

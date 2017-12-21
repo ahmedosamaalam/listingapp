@@ -1,0 +1,65 @@
+<br>
+<br>
+<div class="container">
+  <div class="row">
+
+
+    <h3 class="page-header">Service</h3>
+    <br>
+    <br>
+    <div class="container">
+      <div class="row">
+
+        <!-- content goes here -->
+        <form  (submit)="updateService()" >
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input [(ngModel)]="service.name" type="text" class="form-control" name="name" id="name" placeholder="Enter name">
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="description">Description</label>
+                <input [(ngModel)]="service.description" type="text" class="form-control" name="description" id="description" placeholder="Enter description">
+
+              </div>
+
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="location">Location</label>
+                <input [(ngModel)]="service.location"  type="text" class="form-control" name="price" id="location" placeholder="Enter location">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input [(ngModel)]="service.phone"  type="text" class="form-control" name="phone" id="phone" placeholder="Enter phone">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-md-6">
+              <label for="category">Category</label>
+              <select [(ngModel)]="service.category"  id="category" name="category" class="form-control">
+
+
+                <option *ngFor="let g of categories"  [ngValue]="g._id">{{g.name}}</option>
+
+              </select>
+            </div>
+          </div>
+
+          <button   type="submit" class="btn btn-default" >Submit</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

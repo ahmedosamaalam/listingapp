@@ -1,0 +1,120 @@
+<div class="container">
+
+
+<h1 class="page-header">
+    Blog feeds
+</h1>
+
+
+<div *ngIf="message && newPost" class="row show-hide-message">
+    <div [ngClass]="messageClass">
+        {{message}}
+    </div>
+</div>
+  <br>
+  <br>
+
+<button *ngIf="!newPost" (click)="newBlogForm()" type="button" name="button" class="btn btn-warning">New post</button>
+<button *ngIf="!newPost" (click)="reloadBlogs()" [disabled] = "loadingsBlogs"  type="button" name="button" class="btn btn-default"><span><i class="fa fa-refresh" aria-hidden="true"></i></span> Reload Post</button>
+
+  <br>
+  <br>
+
+<div *ngIf="!newPost">
+
+
+  <div class="card " *ngFor="let post of  allBlogPosts | paginate: { itemsPerPage: 3, currentPage: p }">
+    <div class="card-header card-inverse card-info" >
+      <h5>{{post.title}}</h5>
+    </div>
+    <div class="card-block">
+
+      <p class="card-text">{{post.body}}</p>
+
+    </div>
+    <div class="card-footer text-muted">
+      <p><strong>Posted by:</strong>{{post.createdBy}}</p>
+      <p><strong>Date:</strong>{{post.createAt | date:'longDate'  }}</p>
+
+      <div *ngIf="username === post.createdBy">
+        <p> <strong>Likes:</strong> {{post.likes}}</p>
+        <p> <strong>Dislikes:</strong> {{post.dislikes}}</p>
+      </div>
+
+      <a [routerLink]="['/edit-blog/',post._id]" *ngIf="username === post.createdBy"> <button type="button" class="btn btn-sm btn-info" name="button">Edit</button></a>
+      <a [routerLink]="['/delete-blog/',post._id]" *ngIf="username === post.createdBy"> <button type="button" class="btn btn-sm btn-danger" name="button">Delete</button></a>
+
+      <div class="dropdown">
+        <button [disabled]="post.likeBy.indexOf(username) > -1 " type="button" name="button" (click)="likeBlogs(post._id)" class="btn btn-sm btn-success" *ngIf="username !== post.createdBy"><span><i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp; Likes: {{post.likes}}</span></button>
+        <div class="dropdown-content">
+          <a routerLink="['/user/',liker]" *ngFor="let liker of post.likeBy">{{liker}}</a>
+
+        </div>
+      </div> <!--Likes Dropdown-->
+
+      <div class="dropdown">
+        <button [disabled]="post.dislikeBy.indexOf(username) > -1 " type="button" name="button" (click)="dislikeBlogs(post._id)" class="btn btn-sm btn-warning" *ngIf="username !== post.createdBy"><span><i class="fa fa-thumbs-down" aria-hidden="true"></i>&nbsp; Dislikes: {{post.dislikes}}</span></button>
+        <div class="dropdown-content">
+          <a routerLink="['/user/',disLiker]" *ngFor="let disLiker of post.dislikeBy">{{disLiker}}</a>
+
+        </div>
+      </div> <!--DisLikes Dropdown-->
+    </div> <!--footer close-->
+
+    <ul class="list-group">
+      <li class="list-group-item">
+        <button class="btn btn-sm btn-danger" (click)="draftComment()">Post Comment</button>
+        <br>
+        <!--<form >-->
+          <!--<textarea name="comment" id="comment" cols="30" rows="10"></textarea>-->
+        <!--<a href="#"> <button type="button" class="btn btn-sm btn-info" name="button">Submit post</button></a>-->
+        <!--<a href="#"> <button type="button" class="btn btn-sm btn-danger" name="button">Cancel</button></a>-->
+        <!--</form>-->
+      </li>
+    </ul>
+
+  </div>  <!--card close-->
+
+</div> <!--All blogs Post-->
+
+
+  <!--Add new blogs form-->
+
+  <form [formGroup]="form" class="form-group"  (submit)="addBlogFormSubmit()" *ngIf="newPost" class="form-horizontal" role="form">
+
+    <div [ngClass]="{'has-danger':form.controls.title.errors && form.controls.title.dirty , 'has-success':form.controls.title.valid && form.controls.title.dirty}">
+    <label for="title">Title</label>
+    <input type="text" class="form-control" id="title" name="title" formControlName="title" placeholder="Title">
+
+     <ul *ngIf="form.controls.title.invalid && (form.controls.title.dirty || form.controls.title.touched)"
+        class="text-danger">
+      <li *ngIf="form.controls.title.errors?.required && form.controls.title.dirty"> Title required</li>
+      <li *ngIf="form.controls.title.errors?.minlength && form.controls.title.dirty"> Title must be greater than 5</li>
+       <li *ngIf="form.controls.title.errors?.maxlength && form.controls.title.dirty"> Title must be less than 150</li>
+       <li *ngIf="form.controls.title.errors?.alphanumericChecker && form.controls.title.dirty"> Title contain alphabets and numbers </li>
+    </ul>
+    </div>
+    <br>
+    <div class="form-group" [ngClass]="{'has-danger': form.controls.body.invalid && form.controls.body.dirty, 'has-success': form.controls.body.valid && form.controls.body.dirty}">
+      <label for="body">Body</label>
+      <textarea name="body" id="body" cols="30" rows="10" class="form-control" formControlName="body" placeholder="Body"></textarea>
+      <ul *ngIf="form.controls.body.invalid && (form.controls.body.dirty || form.controls.body.touchend)" class="text-danger">
+        <li *ngIf="form.controls.body.errors?.required">Body Required</li>
+        <li *ngIf="form.controls.body.errors?.minlength">Body must be greater than 5 character  </li>
+        <li *ngIf="form.controls.body.errors?.maxLength">Body must me less than 500 character </li>
+      </ul>
+    </div>
+
+    <button [disabled]="processing" type="button" class="btn btn-danger" (click)="goBack()"  >Go back</button>
+    <button [disabled]="!form.valid || processing "  type="submit"  class="btn  btn-success"  >Submit</button>
+
+  </form>
+
+  <!--Add blogs  form-->
+
+
+
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+</div>
+

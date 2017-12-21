@@ -1,0 +1,168 @@
+.center {
+  margin-top:50px;
+}
+
+.modal-header {
+  padding-bottom: 5px;
+}
+
+.modal-footer {
+  padding: 0;
+}
+
+.modal-footer .btn-group button {
+  height:40px;
+  border-top-left-radius : 0;
+  border-top-right-radius : 0;
+  border: none;
+  border-right: 1px solid #ddd;
+}
+
+.modal-footer .btn-group:last-child > button {
+  border-right: 0;
+}
+
+
+.brick {
+  width: 200px;
+  background: green;
+  margin: 5px;
+  padding: 15px;}
+
+@import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css);
+.col-item
+{
+  border: 1px solid #E1E1E1;
+  border-radius: 5px;
+  background: #FFF;
+}
+.col-item .photo img
+{
+  margin: 0 auto;
+  width: 100%;
+}
+
+.col-item .info
+{
+  padding: 10px;
+  border-radius: 0 0 5px 5px;
+  margin-top: 1px;
+}
+
+.col-item:hover .info {
+  background-color: #F5F5DC;
+}
+.col-item .price
+{
+  /*width: 50%;*/
+  float: left;
+  margin-top: 5px;
+}
+
+.col-item .price h5
+{
+  line-height: 20px;
+  margin: 0;
+}
+
+.price-text-color
+{
+  color: #219FD1;
+}
+
+.col-item .info .rating
+{
+  color: #777;
+}
+
+.col-item .rating
+{
+  /*width: 50%;*/
+  float: left;
+  font-size: 17px;
+  text-align: right;
+  line-height: 52px;
+  margin-bottom: 10px;
+  height: 52px;
+}
+
+.col-item .separator
+{
+  border-top: 1px solid #E1E1E1;
+}
+
+.clear-left
+{
+  clear: left;
+}
+
+.col-item .separator p
+{
+  line-height: 20px;
+  margin-bottom: 0;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.col-item .separator p i
+{
+  margin-right: 5px;
+}
+.col-item .btn-add
+{
+  width: 50%;
+  float: left;
+}
+
+.col-item .btn-add
+{
+  border-right: 1px solid #E1E1E1;
+}
+
+.col-item .btn-details
+{
+  width: 50%;
+  float: left;
+  padding-left: 10px;
+}
+.controls
+{
+  margin-top: 20px;
+}
+[data-slide="prev"]
+{
+  margin-right: 10px;
+}
+
+
+
+.serviceBox{text-align: center;margin-top: 60px;position: relative;z-index: 1; margin-bottom: 21px;}
+.serviceBox .service-icon{width: 78px;height: 78px;border-radius:3px;background: #fff;margin: 0 auto;position: absolute;top: -34px;left: 0;right: 0;z-index: 1;transition: all 0.3s ease-out 0s;}
+.serviceBox:hover .service-icon{transform: rotate(45deg);}
+.serviceBox .service-icon span{display: inline-block;width: 60px;height: 60px;line-height: 60px;border-radius:3px;background: #727cb6;font-size: 30px;color: #fff;margin: auto;position: absolute;top: 0;left: 0;bottom: 0;right: 0;transition: all 0.3s ease-out 0s;}
+.serviceBox .service-icon span i{transition: all 0.3s ease-out 0s;}
+.serviceBox:hover .service-icon span i{transform: rotate(-45deg);}
+.serviceBox .service-content{background: #fff;border: 1px solid #e7e7e7;border-radius: 3px;padding: 55px 15px;position: relative;}
+.serviceBox .service-content:before{content: "";display: block;width: 80px;height: 80px;border: 1px solid #e7e7e7;border-radius: 3px;margin: 0 auto;position: absolute;top: -37px;left: 0;right: 0;z-index: -1;transition: all 0.3s ease-out 0s;}
+.serviceBox:hover .service-content:before{transform: rotate(45deg);}
+.serviceBox .title{font-size: 17px;font-weight: 500;color: #324545;text-transform: uppercase;margin: 0 0 25px 0;position: relative;transition: all 0.3s ease-out 0s;}
+.serviceBox:hover .title{color: #727cb6;}
+.serviceBox .description{font-size: 14px;font-weight: 500;line-height: 24px;margin-bottom: 0;}
+.serviceBox .read-more{display: block;width: 40px;height: 40px;line-height: 38px;border-radius: 50%;background: #fff;border: 1px solid #e7e7e7;font-size: 14px;color: #c4c2c2;margin: 0 auto;position: absolute;bottom: -17px;left: 0; right: 0;transition: all 0.3s ease-out 0s;}
+.serviceBox .read-more:hover{border: 1px solid #727cb6;color: #727cb6;text-decoration: none;}
+.serviceBox.green .service-icon span{ background: #008b8b; }
+.serviceBox.blue .service-icon span{ background: #3498db; }
+.serviceBox.orange .service-icon span{ background: #e67e22; }
+.serviceBox.green:hover .title{ color: #008b8b; }
+.serviceBox.blue:hover .title{ color: #3498db; }
+.serviceBox.orange:hover .title{ color: #e67e22; }
+
+.serviceBox:hover .read-more{border: 1px solid #727cb6;color: #727cb6;}
+.serviceBox.green:hover .read-more{border: 1px solid #008b8b;color: #008b8b;}
+.serviceBox.blue:hover .read-more{border: 1px solid #3498db;color: #3498db;}
+.serviceBox.orange:hover .read-more{border: 1px solid #e67e22;color: #e67e22;}
+
+
+
+
+

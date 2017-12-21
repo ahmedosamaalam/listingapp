@@ -11,6 +11,7 @@ export class ProfileComponent implements OnInit {
   username;
   email;
   user;
+  role;
   constructor(private  _authServices:AuthService) { }
 
  ngOnInit() {
@@ -18,7 +19,9 @@ export class ProfileComponent implements OnInit {
     this._authServices.getProfile().subscribe(profile => {
       this.username = profile.user.username;
       this.email = profile.user.email;
-    })
+      this.role = profile.user.role;
+
+    });
   }
 
 

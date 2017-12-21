@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row">
+
+
+    <h3 class="page-header">Services</h3>
+
+
+    <div class="container">
+      <div class="row">
+        <div class="span4">
+          <form class="form-search">
+            <div class="input-append">
+              <input   name="searchquery" id="searchquery" type="search"  [(ngModel)]="searchquery" placeholder="search an sevices">
+              <button type="submit" (click)="searhService(searchquery)"  class="btn">Search</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <div class="container" *ngIf="!isQuery">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 col-xsx-6" *ngFor="let service of services | paginate: { itemsPerPage: 4, currentPage: p }" >
+          <div class="serviceBox">
+            <div class="service-icon">
+              <span><i class="fa fa-id-card-o"></i></span>
+            </div>
+            <div class="service-content">
+              <h3 class="title">{{service.name}}</h3>
+              <p class="description"> {{service.description}} </p>
+              <a  [routerLink]="['/service/',service._id]" class="read-more fa fa-plus" data-toggle="tooltip" title="details"></a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="container" *ngIf="isQuery">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 col-xsx-6" *ngFor="let service of services | paginate: { itemsPerPage: 4, currentPage: p }" >
+          <div class="serviceBox">
+            <div class="service-icon">
+              <span><i class="fa fa-id-card-o"></i></span>
+            </div>
+            <div class="service-content">
+              <h3 class="title">{{service.name}}</h3>
+              <p class="description"> {{service.description}} </p>
+              <a  [routerLink]="['/service/',service._id]" class="read-more fa fa-plus" data-toggle="tooltip" title="details"></a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+
+  </div>
+</div>

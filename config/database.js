@@ -6,7 +6,17 @@
     module.exports = {
         uri: 'mongodb://localhost:27017/mylistingappdb',
         sercret: crypto,
-        db: 'mylistingappdb'
+        db: 'mylistingappdb',
+        paths    : {
+            // path for pets images
+            serverPath      : '../server/app',
+            imagePath       : 'public/uploads/forms/',
+            profileImagePath: 'public/uploads/profiles/',
+            tmpImagePath    : 'public/uploads/tmp/',
+            dist            : '../dist',
+            expressUploads  : '/uploads',
+            emailPath       : 'server/views/email_templates/',
+        }
 
     }
 }
