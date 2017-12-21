@@ -1,51 +1,51 @@
 #Listing App
 
-###Features:
+Features:
 signup as a merchant.
 signup as a service provider.
 signup as a user.
 
-###merchant:
+merchant:
 -merchandiser can post ad.
 -merchandiser can update ad.
 -merchandiser can delete ad.
 -merchandiser 
 
-###service provider:
+service provider:
 -service provider can post ad.
 -service provider can update ad.
 -service provider can delete ad.
 
-###Other Features:
+Other Features:
 -pagination
 -searching 
 
-###Client Side:
+Client Side:
 Entry page,Login form,Signup Form is done so far.
 
-###Server Side:
+Server Side:
 User register api done is so far.
 
-###Getting Started
+Getting Started
 
-#####Clone Git Repository from https://github.com/ahmedosamaalam/listingapp.git
+Clone Git Repository from https://github.com/ahmedosamaalam/listingapp.git
 
-###Prerequisites:
+Prerequisites:
 Make sure you have installed all of the following prerequisites on your development machine:
 
 Node.js - Download & Install Node.js and the npm package manager. Angular Cli - npm install -g @angular/cli MongoDB - Download & Install MongoDB, and make sure it's running on the default port (27017). Any text editor Installing
 
 Once you have installed the above pre-requisites
 
-#####Running Server:
+Running Server:
 Open CLI in your system and go to the directory where you have cloned the Repository using the following command
 
-#####run:
+run:
 npm install
 
 node index.js
 
-#####Running Client:
+Running Client:
 
 First go to the client directory:
 
