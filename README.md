@@ -15,8 +15,18 @@ Features:
   service provider:		
    service provider can post ad.		
    service provider can update ad.		
-   service provider can delete ad.		
-  		
+   service provider can delete ad.	
+
+  admin :
+   admin can add category
+   admin can edit category
+   admin can update category
+   admin can delete category	 
+   admin can block user temporary 
+   admin can delete user	
+   admin can add service	
+   admin can add product		
+   
   Other Features:		
    pagination		
    searching 		
