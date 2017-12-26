@@ -82,12 +82,14 @@ const passwordValidator = [
 const userSchema = new Schema({
     username: { type: String , required: true , lowercase: true , unique: true , validate: usernameValidator } ,
     email: { type: String , required: true , lowercase: true , unique: true  ,validate:emailValidator} ,
-    password: { type: String , required: true , validate:passwordValidator  },
+    password: { type: String , required: true   },
  //   role: { type: Array , default:['user'] },
     role: { type: String , default:'user' },
-    active : {type: Boolean , required:true , default:false},
+    active : {type: Boolean , required:true , default:false},//email verification wala active
     temporarytoken: {type:String ,  required:true },
-    superAdmin: {type:Boolean , default:false}
+    superAdmin: {type:Boolean , default:false},
+    status : {type: Boolean , required:true , default:false},
+
 });
 
 //Schema middleware to encrypt password

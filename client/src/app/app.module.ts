@@ -38,7 +38,8 @@ import { ItemComponent } from './components/public/items/item/item.component';
 import { PProductComponent } from "./components/public/public-product/product/product.component";
 import { PServiceComponent } from "./components/public/public-service/service/service.component";
 import { BarRatingModule } from "ngx-bar-rating";
-import { DisqusModule } from 'ngx-disqus';
+import { AdminService } from "./services/admin.service";
+
 
 //import { ImageUploadModule } from "angular2-image-upload";
 
@@ -100,11 +101,11 @@ import { DisqusModule } from 'ngx-disqus';
     FlashMessagesModule,
     NgxPaginationModule,
     BarRatingModule,
-    DisqusModule.forRoot('disqus_shortname')
+
     //ImageUploadModule.forRoot(),
 
   ],
-  providers: [AuthService ,AuthGuard,NotAuthGuard, BlogService, CategoryService ,ProductService,ServiceService,PublicService],
+  providers: [AuthService ,AuthGuard,NotAuthGuard, BlogService, CategoryService ,ProductService,ServiceService,PublicService , AdminService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

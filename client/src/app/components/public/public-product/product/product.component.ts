@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router , ActivatedRoute } from "@angular/router";
 import { PublicService } from "../../../../services/public.service";
-
-
+import { AuthService} from "../../../../services/auth.service";
 
 
 @Component({
@@ -13,10 +12,11 @@ import { PublicService } from "../../../../services/public.service";
 export class PProductComponent implements OnInit {
 
 
+  message;
+  messageClass;
 
   product;
   currentUrl
-
   starRating = 3;
   vRating = 1;
   faoRating;
@@ -30,7 +30,8 @@ export class PProductComponent implements OnInit {
 
 
   constructor(private  _publicService:PublicService,
-              private _activatedRoute:ActivatedRoute
+              private _activatedRoute:ActivatedRoute,
+              private _authServce:AuthService
 
   ) { }
 
@@ -114,9 +115,22 @@ export class PProductComponent implements OnInit {
 
 
   onFaoRate(event){
-    this.faoRating  = event;
-  //  console.log(this.faoRating);
-    this.rateProduct();
+
+    if(!this._authServce.loggedIn()){
+      this.message='Please login to rate product';
+      this.messageClass='alert alert-danger';
+
+    }else {
+
+      this.faoRating  = event;
+      //  console.log(this.faoRating);
+      this.rateProduct();
+
+
+
+    }
+
+   // *ngIf="_authService.loggedIn()
 
 
   }

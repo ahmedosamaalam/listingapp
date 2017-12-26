@@ -20,11 +20,13 @@ export class ActivateComponent implements OnInit {
 
 
 
+
+
   ngOnInit() {
     this.currentUrl = this._activatedRouter.snapshot.params;
-    //console.log(this.currentUrl.token);
+    console.log(this.currentUrl.token);
 
-    this._authservice.activateAccount(this.currentUrl.token).subscribe(data=>{
+    this._authservice.activate(this.currentUrl.token).subscribe(data=>{
 
 
       console.log(data);

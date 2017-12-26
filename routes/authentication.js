@@ -36,7 +36,8 @@ module.exports = ( router ) => {
             email:req.body.email.toLowerCase(),
             password:req.body.password,
             role:req.body.role,
-            temporarytoken: jwt.sign({email:req.body.email} , config.sercret , {expiresIn:'24h'} )
+            temporarytoken: jwt.sign({email:req.body.email} , config.sercret , {expiresIn:'24h'} ),
+            status:true
 
         });
             user.save((err) =>{
@@ -107,15 +108,19 @@ module.exports = ( router ) => {
                        if(!user){
                            res.json({success:false , message:"username not found"});
                        }else {
-                           const validPassword = user.comparePassword(req.body.password);
-                           if(!validPassword){
-                               res.json({success:false , message:"invalid password"});
-                           } else {
+                            if(user.status === false){
+                                res.json({success:false , message:'You are temporary blocked, Please contact with admin '})
+                            }else {
+                                const validPassword = user.comparePassword(req.body.password);
+                                if(!validPassword){
+                                    res.json({success:false , message:"invalid password"});
+                                } else {
 
-                               const  token =  jwt.sign({userID:user._id} , config.sercret , {expiresIn:'24h'} );
+                                    const  token =  jwt.sign({userID:user._id} , config.sercret , {expiresIn:'24h'} );
 
-                               res.json({success:true, message:"Success!" , token:token , user:{username:user.username} });
-                           }
+                                    res.json({success:true, message:"Success!" , token:token , user:{username:user.username} });
+                                }
+                            }
                        }
                    }
                });
@@ -170,6 +175,67 @@ module.exports = ( router ) => {
 
 
 
+    // router.put('/activate/:token' , (req, res)=>{
+    //     User.findOne({temporarytoken: req.params.token } , (err , user)=>{
+    //         if (err){
+    //             res.json({success:false , message:+err});
+    //         }else {
+    //                 const token = req.params.token;
+    //                 jwt.verify(token , config.sercret , (err , decoded) =>{ //verify token
+    //                     if(err){
+    //                         res.json({success:false , message:'Activation link has expired: '+err})
+    //                     }else if (!user) {
+    //                         res.json({success:false , message:'Activation link has expired'})
+    //                     }
+    //                     else{
+    //
+    //                         user.temporarytoken = false;
+    //                         user.active = true;
+    //
+    //                         user.save((err)=>{
+    //                             if (err){
+    //                                 console.log('database krne me error hai : '+err);
+    //                             }else {
+    //
+    //
+    //
+    //                                 var email = {
+    //                                     from: 'ListingApp , info@listingapp.com',
+    //                                     to: user.email,
+    //                                     subject: 'Account activated ',
+    //                                     text: 'Thank '+user.username+' your account has been activated.',
+    //                                     html: 'Thank '+user.username+' your account has been activated.'
+    //                                 };
+    //
+    //                                 client.sendMail(email, function(err, info){
+    //                                     if (err ){
+    //                                         console.log(error);
+    //                                     }
+    //                                     else {
+    //                                         console.log('Message sent: ' + info.response);
+    //                                     }
+    //                                 });
+    //
+    //                                 res.json({success:true , message:'Account activated!'});
+    //                             }
+    //                         });
+    //
+    //
+    //
+    //
+    //                     }
+    //                 })
+    //
+    //             }
+    //
+    //     })
+    //
+    // });
+    //
+    //
+    //
+
+
 
 
 
@@ -198,62 +264,62 @@ module.exports = ( router ) => {
 
 
 
-    router.put('/activate/:token' , (req, res)=>{
-        User.findOne({temporarytoken: req.params.token } , (err , user)=>{
-            if (err){
-                res.json({success:false , message:+err});
-            }else {
-                    const token = req.params.token;
-                    jwt.verify(token , config.sercret , (err , decoded) =>{ //verify token
-                        if(err){
-                            res.json({success:false , message:'Activation link has expired: '+err})
-                        }else if (!user) {
-                            res.json({success:false , message:'Activation link has expired'})
-                        }
-                        else{
-
-                            user.temporarytoken = false;
-                            user.active = true;
-
-                            user.save((err)=>{
-                                if (err){
-                                    console.log('database krne me error hai : '+err);
-                                }else {
-
-
-
-                                    var email = {
-                                        from: 'ListingApp , info@listingapp.com',
-                                        to: user.email,
-                                        subject: 'Account activated ',
-                                        text: 'Thank '+user.username+' your account has been activated.',
-                                        html: 'Thank '+user.username+' your account has been activated.'
-                                    };
-
-                                    client.sendMail(email, function(err, info){
-                                        if (err ){
-                                            console.log(error);
-                                        }
-                                        else {
-                                            console.log('Message sent: ' + info.response);
-                                        }
-                                    });
-
-                                    res.json({success:true , message:'Account activated!'});
-                                }
-                            });
-
-
-
-
-                        }
-                    })
-
-                }
-
-        })
-
-    });
+    // router.put('/activate/:token' , (req, res)=>{
+    //     User.findOne({temporarytoken: req.params.token } , (err , user)=>{
+    //         if (err){
+    //             res.json({success:false , message:+err});
+    //         }else {
+    //                 const token = req.params.token;
+    //                 jwt.verify(token , config.sercret , (err , decoded) =>{ //verify token
+    //                     if(err){
+    //                         res.json({success:false , message:'Activation link has expired: '+err})
+    //                     }else if (!user) {
+    //                         res.json({success:false , message:'Activation link has expired'})
+    //                     }
+    //                     else{
+    //
+    //                         user.temporarytoken = false;
+    //                         user.active = true;
+    //
+    //                         user.save((err)=>{
+    //                             if (err){
+    //                                 console.log('database krne me error hai : '+err);
+    //                             }else {
+    //
+    //
+    //
+    //                                 var email = {
+    //                                     from: 'ListingApp , info@listingapp.com',
+    //                                     to: user.email,
+    //                                     subject: 'Account activated ',
+    //                                     text: 'Thank '+user.username+' your account has been activated.',
+    //                                     html: 'Thank '+user.username+' your account has been activated.'
+    //                                 };
+    //
+    //                                 client.sendMail(email, function(err, info){
+    //                                     if (err ){
+    //                                         console.log(error);
+    //                                     }
+    //                                     else {
+    //                                         console.log('Message sent: ' + info.response);
+    //                                     }
+    //                                 });
+    //
+    //                                 res.json({success:true , message:'Account activated!'});
+    //                             }
+    //                         });
+    //
+    //
+    //
+    //
+    //                     }
+    //                 })
+    //
+    //             }
+    //
+    //     })
+    //
+    // });
 
 
 

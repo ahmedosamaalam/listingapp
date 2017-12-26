@@ -12,11 +12,29 @@
             {{message}}
           </div>
     </div>
-      <button *ngIf="!newCategory" type="button" (click)="addCategory()" class="btn btn-success">Add Category</button>
-      <button *ngIf="!newCategory" type="button" (click)="refresh()" class="btn btn-default">Refresh Category</button>
+
+      <button *ngIf="!userTab"    (click)="showUsers()" type="button"  class="btn btn-success">+Users</button>
+      <button *ngIf="!productTab" (click)="showProducts()" type="button"  class="btn btn-success">+Products</button>
+      <button *ngIf="!serviceTab" (click)="showServices()" type="button"  class="btn btn-success">+Services</button>
+      <button *ngIf="!categoryTab"(click)="showCategories()" type="button"  class="btn btn-success">+Categories</button>
+
 
       <br>
       <br>
+
+  <div *ngIf="categoryTab">
+
+    <!-- ------------------------------------------
+************* Categories****************
+----------------------------------------- -->
+
+
+    <button *ngIf="!newCategory" type="button" (click)="addCategory()" class="btn btn-success">Add Category</button>
+    <button *ngIf="!newCategory" type="button" (click)="refresh()" class="btn btn-default">Quick Refresh</button>
+
+    <br>
+    <br>
+
 
     <div  *ngIf="!newCategory">
 
@@ -40,36 +58,127 @@
 
         </tr>
         </tbody>
+        <button [disabled]="processing" type="submit" class="btn btn-success" (click)="hideCategories()">-Categories</button>
+        <hr>
       </table>
-
-
 
     </div>
 
+    <form [formGroup]="form"  *ngIf="newCategory"  (submit)="addCategoryFormSubmit()"  class="form-group">
+      <div>
+        <label for="category" >Add Category</label>
+        <input formControlName="category" type="text" name="category" id="category"class="form-control" placeholder="category name">
 
+        <ul class="alert-danger" *ngIf="form.controls.category.invalid && (form.controls.category.dirty || form.controls.category.touchend)  ">
+          <li *ngIf="form.controls.category.errors.required">This field is required</li>
+          <li *ngIf="form.controls.category.errors.minlength || form.controls.category.errors.maxlength">2 to 120 char limit</li>
+        </ul>
 
-      <form [formGroup]="form"  *ngIf="newCategory"  (submit)="addCategoryFormSubmit()"  class="form-group">
-        <div>
-          <label for="category" >Add Category</label>
-          <input formControlName="category" type="text" name="category" id="category"class="form-control" placeholder="category name">
+      </div>
 
-          <ul class="alert-danger" *ngIf="form.controls.category.invalid && (form.controls.category.dirty || form.controls.category.touchend)  ">
-            <li *ngIf="form.controls.category.errors.required">This field is required</li>
-            <li *ngIf="form.controls.category.errors.minlength || form.controls.category.errors.maxlength">2 to 120 char limit</li>
-          </ul>
-
-        </div>
-
-        <button [disabled]="!form.valid || processing" type="submit" class="btn btn-success">Submit</button>
-        <button [disabled]="processing" type="submit" class="btn btn-success" (click)="goBack()">Back</button>
-      </form>
-
+      <button [disabled]="!form.valid || processing" type="submit" class="btn btn-success">Submit</button>
+      <button [disabled]="processing" type="submit" class="btn btn-success" (click)="goBack()">Back</button>
+    </form>
 
 
 
+  </div>
 
 
 
+      <!-- ------------------------------------------
+    ************* Products****************
+   ----------------------------------------- -->
+      <div  *ngIf="productTab">
+
+      <table class="table" >
+        <thead class="thead-light">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">ID</th>
+          <th scope="col">Product</th>
+          <th scope="col">Delete</th>
+
+        </tr>
+        </thead>
+        <tbody *ngFor="let product of products; let i = index">
+        <tr >
+          <th >{{i+1}}</th>
+          <td>{{product._id}}</td>
+          <td>{{product.name}}</td>
+          <td> <button (click)="deleteProduct(product._id)" type="button" class="btn btn-default">Delete</button></td>
+        </tr>
+        </tbody>
+      </table>
+        <button [disabled]="processing" type="submit" class="btn btn-success" (click)="hideProducts()">-Products</button>
+        <hr>
+      </div>
+
+
+      <!-- ------------------------------------------
+    ************* Services****************
+   ----------------------------------------- -->
+      <div  *ngIf="serviceTab">
+
+
+      <table class="table" >
+        <thead class="thead-light">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">ID</th>
+          <th scope="col">Sevice</th>
+          <th scope="col">Delete</th>
+
+        </tr>
+        </thead>
+        <tbody *ngFor="let service of services; let i = index">
+        <tr >
+          <th >{{i+1}} </th>
+          <td>{{service._id}}</td>
+          <td>{{service.name}}</td>
+          <td> <button (click)="deleteService(service._id)" type="button" class="btn btn-default">Delete</button></td>
+
+        </tr>
+        </tbody>
+      </table>
+        <button [disabled]="processing" type="submit" class="btn btn-success" (click)="hideServices()">-Service</button>
+        <hr>
+      </div>
+
+      <!-- ------------------------------------------
+************* Users****************
+----------------------------------------- -->
+      <div  *ngIf="userTab">
+
+
+      <table class="table" >
+        <thead class="thead-light">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">ID</th>
+          <th scope="col">User</th>
+          <th scope="col">Email</th>
+          <th scope="col">Status</th>
+          <th scope="col">Delete</th>
+
+        </tr>
+        </thead>
+        <tbody *ngFor="let user of users; let i = index">
+        <tr >
+          <th >{{i+1}} </th>
+          <td>{{user._id}}</td>
+          <td>{{user.username}}</td>
+          <td>{{user.email}}</td>
+          <button *ngIf="user.status" (click)="blockUser(user._id)"  type="button" class="btn btn-success">Avtive</button>
+           <button *ngIf="!user.status" (click)="unBlockUser(user._id)" type="button" class="btn btn-danger">Blocked</button>
+           <td><button (click)="deleteUser(user._id)" type="button" class="btn btn-default">Delete</button></td>
+
+        </tr>
+        </tbody>
+      </table>
+        <button [disabled]="processing" type="submit" class="btn btn-success" (click)="hideUsers()">-Users  </button>
+        <hr>
+      </div>
 
     </div>
 

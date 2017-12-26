@@ -120,7 +120,7 @@ export class RegisterComponent  {
       }else {
         this.messageClass = 'alert alert-success';
         this.message = data.message
-        this._router.navigate(['/home']);
+        this._router.navigate(['/login']);
 
       }
     });

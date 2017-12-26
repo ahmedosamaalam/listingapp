@@ -59,11 +59,12 @@ export class AuthService {
                .map(res =>res.json() );
   }
 
-  //activate account
-  activateAccount(token){
-    //const token = { token:token};
-    return this._http.put(this.domain+'/authentication/activate/' ,token ).map(res =>res.json())
-  }
+  // //activate account
+  // activateAccount(token){
+  //   const token = { token:token};
+  //   this.createAuthenticationHeaders();
+  //   return this._http.put(this.domain+'/authentication/activate/'+token,this.options ).map(res =>res.json())
+  // }
 
 
 
@@ -114,6 +115,14 @@ export class AuthService {
     this.createAuthenticationHeaders();
     return this._http.get(this.domain+'/authentication/role' ,this.options).map(res=>res.json());
   }
+
+
+//activate account
+  activate(token){
+    this.createAuthenticationHeaders();
+    return this._http.put(this.domain+'/authentication/activate/'+token ,this.options).map(res=>res.json());
+  }
+
 
 
   // fbLogin() {

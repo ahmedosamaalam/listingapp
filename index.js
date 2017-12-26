@@ -15,6 +15,7 @@ const  blog  = require('./routes/blogs')(router);
 const  service  = require('./routes/services')(router);
 
 const  form = require('./routes/form')(router);
+const  admin = require('./routes/admin')(router);
 const  products = require('./routes/productx')(router , path);
 
 const  passport = require('passport')
@@ -60,6 +61,7 @@ app.use('/category' , categories );
 app.use('/authentication' , authentication );
 app.use('/service' , service );
 app.use('/product', products);
+app.use('/admin', admin);
 
 app.get('*',(req , res )=>{
         res.sendFile(path.join(__dirname +'/client/dist/index.html'))

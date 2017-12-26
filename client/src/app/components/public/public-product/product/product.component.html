@@ -32,11 +32,15 @@
                 <td>{{p.description}}</td>
               </tr>
 
-              <div class="view">
+              <div class="view" >
                 <bar-rating [rate]="faoRating" (rateChange)="onFaoRate($event)" [max]="10" [theme]="'fontawesome-o'"></bar-rating>
               </div>
               Total ratings:{{totalHitLenght}}
               Average:{{mean}}
+              <br>
+              <div class="{{messageClass}}">
+                {{message}}
+              </div>
 
 
               </tbody>
