@@ -6,7 +6,7 @@ import { AuthService} from "./auth.service";
 @Injectable()
 export class CategoryService {
 
-  domain = 'http://localhost:1212'
+  domain = ''
 
   constructor(private _http:Http,
               private _authService : AuthService
