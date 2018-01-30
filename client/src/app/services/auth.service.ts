@@ -70,13 +70,13 @@ export class AuthService {
 
   //check username, current username already taken or not
   checkUsername(username){
-    return this._http.get(this.domain + '/authentication/checkUsername/'+username )
+    return this._http.get(this.domain + 'authentication/checkUsername/'+username )
       .map(res =>res.json() );
   }
 
   //check email id, current email already taken or not
   checkEmail(email){
-    return this._http.get(this.domain + '/authentication/checkEmail/'+email )
+    return this._http.get(this.domain + 'authentication/checkEmail/'+email )
       .map(res =>res.json() );
   }
 
