@@ -6,7 +6,7 @@ import { AuthService} from "./auth.service";
 @Injectable()
 export class CategoryService {
 
-  domain = ''
+  domain = 'https://pacific-reef-33472.herokuapp.com'
 
   constructor(private _http:Http,
               private _authService : AuthService
