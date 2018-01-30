@@ -19,7 +19,7 @@ export class CategoryComponent implements OnInit {
   categoryTab=false;
   processing=false;
   newCategory=false;
-  form:FormGroup;
+  form;
   categories;
   products;
   services;

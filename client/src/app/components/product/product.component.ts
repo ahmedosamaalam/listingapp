@@ -14,7 +14,7 @@ export class ProductComponent implements OnInit {
 
   message;
   messageClass;
-  form:FormGroup;
+  form;
   categories;
   processing = false;
   newProduct = false;
@@ -29,7 +29,7 @@ export class ProductComponent implements OnInit {
 
 
   ) {
-    this.createForm()
+    this.createForm();
   }
 
   createForm(){

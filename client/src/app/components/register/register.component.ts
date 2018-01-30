@@ -24,7 +24,7 @@ export class RegisterComponent  {
   emailValid=true;
   emailMessage;
 
-  form: FormGroup;
+  form;
 
   formEnable(){
 

@@ -21,7 +21,7 @@ export class BlogComponent implements OnInit {
   newPost = false;
   loadingsBlogs = false;
   processing = false;
-  form:FormGroup;
+  form;
   allBlogPosts;
   p: number = 1;
 
