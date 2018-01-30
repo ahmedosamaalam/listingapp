@@ -35,10 +35,10 @@ mongoose.connection.openUri( config.uri , (err)=>{
 });
 //mongoose.connect(config.uri, { useMongoClient: true })
 
-//middleware for cors, Just for development mode
-app.use(cors({
-    origin: 'http://localhost:4200'
-}));
+// //middleware for cors, Just for development mode
+// app.use(cors({
+//     origin: 'http://localhost:4200'
+// }));
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
