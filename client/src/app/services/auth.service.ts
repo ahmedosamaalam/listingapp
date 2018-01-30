@@ -55,7 +55,7 @@ export class AuthService {
 
   //communicate with  api and map
   registerUsers(user){
-    return this._http.post(this.domain + '/authentication/register' , user )
+    return this._http.post(this.domain + 'authentication/register' , user )
                .map(res =>res.json() );
   }
 
@@ -82,7 +82,7 @@ export class AuthService {
 
   //communicate with login api and map
   loginUser(user){
-    return this._http.post(this.domain + '/authentication/login', user )
+    return this._http.post(this.domain + 'authentication/login', user )
                .map(res=>res.json());
   }
 
@@ -102,7 +102,7 @@ export class AuthService {
 //getting current profile info
   getProfile(){
     this.createAuthenticationHeaders();
-    return this._http.get(this.domain + '/authentication/profile' , this.options)
+    return this._http.get(this.domain + 'authentication/profile' , this.options)
                .map(res=>res.json() );
   }
 
@@ -113,14 +113,14 @@ export class AuthService {
 
   roleCheck(){
     this.createAuthenticationHeaders();
-    return this._http.get(this.domain+'/authentication/role' ,this.options).map(res=>res.json());
+    return this._http.get(this.domain+'authentication/role' ,this.options).map(res=>res.json());
   }
 
 
 //activate account
   activate(token){
     this.createAuthenticationHeaders();
-    return this._http.put(this.domain+'/authentication/activate/'+token ,this.options).map(res=>res.json());
+    return this._http.put(this.domain+'authentication/activate/'+token ,this.options).map(res=>res.json());
   }
 
 
