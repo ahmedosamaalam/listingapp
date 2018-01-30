@@ -18,7 +18,7 @@ export class ServiceComponent implements OnInit {
   message;
   messageClass;
   newService;
-  form;
+  form:FormGroup;
   username;
   categories;
   processing;

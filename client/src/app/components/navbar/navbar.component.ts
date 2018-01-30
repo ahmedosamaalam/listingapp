@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
   constructor(public _authService:AuthService ,
               private _route:Router ,
               private _flashMessageService:FlashMessagesService ,
-              public  authService:AuthService //mistake :D
+              public  authService:AuthService // mistake :D
 
   ) {}
 

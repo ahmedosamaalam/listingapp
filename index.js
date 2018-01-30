@@ -49,7 +49,7 @@ app.use(bodyParser.json());
 
 
 //middleware static directory for frontend
-app.use(express.static(__dirname+'/client/dist/'));
+app.use(express.static(__dirname+'/public'));
 
 //public middleware
 app.use('/publicRoutes',publicRoutes);
@@ -64,7 +64,7 @@ app.use('/product', products);
 app.use('/admin', admin);
 
 app.get('*',(req , res )=>{
-        res.sendFile(path.join(__dirname +'/client/dist/index.html'))
+        res.sendFile(path.join(__dirname +'/public/index.html'))
 });
 
 
