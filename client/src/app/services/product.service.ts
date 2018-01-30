@@ -6,7 +6,7 @@ import { AuthService} from "./auth.service";
 @Injectable()
 export class ProductService {
 
-  domain = 'http://localhost:1212';
+  domain = 'https://pacific-reef-33472.herokuapp.com';
 
   constructor(private _authService:AuthService,
               private _http:Http
