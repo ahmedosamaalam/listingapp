@@ -6,7 +6,7 @@ import { tokenNotExpired } from 'angular2-jwt';
 @Injectable()
 export class AuthService {
 
-  domain = 'https://pacific-reef-33472.herokuapp.com';
+  domain = '';
   authTokenl;
   user;
   headers;

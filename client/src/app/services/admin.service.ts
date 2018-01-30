@@ -6,7 +6,7 @@ import "rxjs/add/operator/map";
 @Injectable()
 export class AdminService {
 
-  domain = 'https://pacific-reef-33472.herokuapp.com'
+  domain = ''
 
   constructor(private _http:Http,
               private _authService:AuthService
