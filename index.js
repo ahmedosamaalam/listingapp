@@ -70,7 +70,7 @@ app.get('*',(req , res )=>{
 
 
 //serverlisting
-var port =  process.env.PORT || 1212;
+var port =  process.env.PORT || 8080;
 app.listen( port , () => {
     console.log('Server Stared at port  : ' +port);
 });
